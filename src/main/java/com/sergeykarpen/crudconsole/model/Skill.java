@@ -1,11 +1,8 @@
 package main.java.com.sergeykarpen.crudconsole.model;
 
-import java.io.Serializable;
+public class Skill {
 
-
-public class Skill implements Serializable {
-
-    private static final String pathToSkillFile = ("C:\\Users\\Admin\\IdeaProjects\\SpringSecurityApp\\CRUDConsole\\src\\main\\java\\com\\sergeykarpen\\crudconsole\\resources\\skills.txt");
+    public static final String pathToSkillFile = ("C:\\Users\\Admin\\IdeaProjects\\SpringSecurityApp\\CrudConsole\\src\\main\\resources\\skills.txt");
 
     Long id;
     String name;
