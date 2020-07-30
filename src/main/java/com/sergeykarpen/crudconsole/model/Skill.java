@@ -1,8 +1,7 @@
-package main.java.com.sergeykarpen.crudconsole.model;
+package com.sergeykarpen.crudconsole.model;
 
 public class Skill {
 
-    public static final String pathToSkillFile = ("C:\\Users\\Admin\\IdeaProjects\\SpringSecurityApp\\CrudConsole\\src\\main\\resources\\skills.txt");
 
     Long id;
     String name;
@@ -22,7 +21,6 @@ public class Skill {
     public void setName(String name) {
         this.name = name;
     }
-
 
     @Override
     public String toString() {
