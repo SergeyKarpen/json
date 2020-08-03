@@ -1,7 +1,7 @@
 package com.sergeykarpen.crudconsole;
 
-import com.sergeykarpen.crudconsole.view.View;
 
+import com.sergeykarpen.crudconsole.view.View;
 
 import java.io.IOException;
 

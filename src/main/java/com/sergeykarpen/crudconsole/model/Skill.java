@@ -2,7 +2,6 @@ package com.sergeykarpen.crudconsole.model;
 
 public class Skill {
 
-
     Long id;
     String name;
 
@@ -21,6 +20,7 @@ public class Skill {
     public void setName(String name) {
         this.name = name;
     }
+
 
     @Override
     public String toString() {

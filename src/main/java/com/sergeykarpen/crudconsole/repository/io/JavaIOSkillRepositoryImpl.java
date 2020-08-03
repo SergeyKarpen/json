@@ -1,6 +1,5 @@
 package com.sergeykarpen.crudconsole.repository.io;
 
-
 import com.sergeykarpen.crudconsole.model.Skill;
 import com.sergeykarpen.crudconsole.repository.SkillRepository;
 
@@ -9,24 +8,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.sergeykarpen.crudconsole.util.IOUtil.*;
+import static com.sergeykarpen.crudconsole.util.IOUtil.getPathToTheFile;
 
 public class JavaIOSkillRepositoryImpl implements SkillRepository {
 
-    public static final String pathToSkillFile = "src\\main\\resources\\skills.txt";
+    private final static String fileName = "skills.txt";
 
+    @Override
     public List<Skill> getAll(){
         try {
-            return convertStringToSkillArray(readFile(pathToSkillFile));
+            return convertStringToSkillArray(readFile((getPathToTheFile(fileName))));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
     }
 
+    @Override
     public Skill getById(Long id) {
         Skill needSkillById = new Skill();
         try {
-            for (Skill needSkill : convertStringToSkillArray(readFile(pathToSkillFile))) {
+            for (Skill needSkill : convertStringToSkillArray(readFile((getPathToTheFile(fileName))))) {
                 if (needSkill.getId().equals(id)) {
                     needSkillById = needSkill;
                 }
@@ -37,10 +39,11 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
         return needSkillById;
     }
 
+    @Override
     public Skill save(Skill skill) {
         List<Skill> newSkills = null;
         try {
-            newSkills = new ArrayList<>(convertStringToSkillArray(readFile(pathToSkillFile)));
+            newSkills = new ArrayList<>(convertStringToSkillArray(readFile(getPathToTheFile(fileName))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -48,14 +51,15 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
         saveSkill.setName(skill.getName());
         saveSkill.setId((long) (newSkills.size() + 1));
         newSkills.add(saveSkill);
-        writeInFile("", "");
+        writeInFile("", fileName);
         return null;
     }
 
+    @Override
     public void deleteById(Long id) {
         List<Skill> newSkills = null;
         try {
-            newSkills = new ArrayList<>(convertStringToSkillArray(readFile(pathToSkillFile)));
+            newSkills = new ArrayList<>(convertStringToSkillArray(readFile(getPathToTheFile(fileName))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -64,13 +68,14 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
                 s.setName(null);
             }
         }
-        writeInFile("", "");
+        writeInFile("", fileName);
     }
 
+    @Override
     public Skill update(Skill skill) {
         List<Skill> newSkills = null;
         try {
-            newSkills = new ArrayList<>(convertStringToSkillArray(readFile(pathToSkillFile)));
+            newSkills = new ArrayList<>(convertStringToSkillArray(readFile(getPathToTheFile(fileName))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -79,7 +84,7 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
                 s.setName(skill.getName());
             }
         }
-        writeInFile("", "");
+        writeInFile("", fileName);
         return null;
     }
 }

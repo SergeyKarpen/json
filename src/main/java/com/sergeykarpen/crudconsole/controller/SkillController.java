@@ -21,18 +21,18 @@ public class SkillController {
         repo.save(s);
     }
 
-    public void update(Long id, String name) {
+    public void update(Long id, String name) throws IOException {
         Skill s = new Skill();
         s.setName(name);
         s.setId(id);
         repo.update(s);
     }
 
-    public Skill getById(Long id) {
+    public Skill getById(Long id) throws IOException {
         return repo.getById(id);
     }
 
-    public void delete(Long id) {
+    public void delete(Long id) throws IOException {
         repo.deleteById(id);
     }
 

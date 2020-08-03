@@ -2,16 +2,23 @@ package com.sergeykarpen.crudconsole.util;
 
 import com.sergeykarpen.crudconsole.model.Skill;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class IOUtil {
 
-    public static List<String> readFile(String pathToSkillFile) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(pathToSkillFile));
+    private final static String pathToFile = "\\src\\main\\resources\\";
+
+    public static List<String> readFile(String fileName) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(getPathToTheFile(fileName)));
         String line;
         List<String> listOfStrings = new ArrayList<>();
         while ((line = reader.readLine()) != null) {
@@ -43,8 +50,8 @@ public class IOUtil {
         }
     }
 
-    public static void writeInFile(String value, String pathToSkillFile) {
-        try (FileWriter writer = new FileWriter(pathToSkillFile, true)) {
+    public static void writeInFile(String value, String fileName) {
+        try (FileWriter writer = new FileWriter(getPathToTheFile(fileName), true)) {
             try {
                 writer.write(value);
             } catch (IOException ex) {
@@ -58,5 +65,11 @@ public class IOUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String getPathToTheFile(String fileName) {
+       Path AbsolutePath = Paths.get("").toAbsolutePath();
+       String path = AbsolutePath + pathToFile + fileName;
+        return path;
     }
 }
