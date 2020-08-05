@@ -1,14 +1,14 @@
 package com.sergeykarpen.crudconsole.view;
 
 import com.sergeykarpen.crudconsole.controller.SkillController;
+import com.sergeykarpen.crudconsole.model.Skill;
+import com.sergeykarpen.crudconsole.repository.SkillRepository;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
-import static com.sergeykarpen.crudconsole.util.IOUtil.printAllSkill;
-import static com.sergeykarpen.crudconsole.util.IOUtil.printSkill;
-
-public class View {
+public class MenuSkills {
 
     private final String menuSelectionMessage = "Выберите необходимое действие:\n" +
             "1.Просмотреть список навыков\n" +
@@ -24,58 +24,65 @@ public class View {
 
     private final String saveMessage = "Введите навык для добавления его в существующий список";
 
-    private final String deleteMessage = "Выбирите навык для его удаления из списка";
+    private final String deleteMessage = "Выберите навык для его удаления из списка";
 
     private final String editMessage = "Введите необходимые изменения";
 
     private final String incorrectInputMessage = "Неверный ввод, повторите";
 
-    private final String endMessage = "Конец работы приложения";
+    private final String endMessage = "Выход из меню Skills";
 
 
-    public void showMenu() throws IOException {
-        SkillController controller = new SkillController();
+    public void showMenuSkills() throws IOException {
+        SkillController skillController = new SkillController();
 
         boolean isExit = false;
         do {
-            System.out.println( menuSelectionMessage );
-            Scanner scanner = new Scanner( System.in );
+            System.out.println(menuSelectionMessage);
+            Scanner scanner = new Scanner(System.in);
             String inputNumber = scanner.nextLine();
             switch (inputNumber) {
                 case ("1"):
-                    System.out.println( getAllMessage );
-                    printAllSkill( controller.getAll() );
+                    System.out.println(getAllMessage);
+                    printAll(skillController.getAll());
                     break;
                 case ("2"):
-                    System.out.print( getByIdMessage );
+                    System.out.print(getByIdMessage);
                     int inputId = scanner.nextInt();
-                    printSkill( controller.getById( (long) inputId ) );
+                    skillController.getById((long) inputId).toString();
                     break;
                 case ("3"):
-                    System.out.print( saveMessage );
+                    System.out.print(saveMessage);
                     String inputNewStringSkill = scanner.nextLine();
-                    controller.save( inputNewStringSkill );
+                    skillController.save(inputNewStringSkill);
                     break;
                 case ("4"):
-                    System.out.print( deleteMessage );
+                    System.out.print(deleteMessage);
                     int inputDelSkill = scanner.nextInt();
-                    controller.delete( (long) inputDelSkill );
+                    skillController.delete((long) inputDelSkill);
                     break;
                 case ("5"):
-                    System.out.print( getByIdMessage );
-                    int inputUpdateSkillId = Integer.parseInt( scanner.nextLine() );
-                    System.out.println( editMessage );
+                    System.out.print(getByIdMessage);
+                    int inputUpdateSkillId = Integer.parseInt(scanner.nextLine());
+                    System.out.println(editMessage);
                     String inputUpdateSkillName = scanner.nextLine();
-                    controller.update( (long) inputUpdateSkillId, inputUpdateSkillName );
+                    skillController.update((long) inputUpdateSkillId, inputUpdateSkillName);
                     break;
                 case ("6"):
                     isExit = true;
                     break;
                 default:
-                    System.out.println( incorrectInputMessage );
+                    System.out.println(incorrectInputMessage);
                     break;
             }
         } while (!isExit);
-        System.out.println( endMessage );
+        System.out.println(endMessage);
+    }
+
+
+    public void printAll(List<Skill> listSkill) {
+        for (Skill p : listSkill) {
+            System.out.print(p.toString());
+        }
     }
 }

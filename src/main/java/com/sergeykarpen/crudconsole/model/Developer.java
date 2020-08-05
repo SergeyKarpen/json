@@ -4,10 +4,10 @@ import java.util.Set;
 
 public class Developer {
 
-    Long id;
-    String name;
-    Set<Skill> skills;
-    Account account;
+     Long id;
+     String name;
+     Set<Skill> skills;
+     Account account;
 
     public Long getId() {
         return id;
@@ -41,6 +41,10 @@ public class Developer {
         this.account = account;
     }
 
-
-
+    @Override
+    public String toString() {
+        return id + "," + name + "\n";
+    }
 }
+
+
