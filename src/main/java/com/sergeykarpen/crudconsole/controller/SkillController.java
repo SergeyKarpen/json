@@ -9,34 +9,34 @@ import java.util.List;
 
 public class SkillController {
 
-    private SkillRepository repoSkill = new JavaIOSkillRepositoryImpl();
+    private SkillRepository skillRepository = new JavaIOSkillRepositoryImpl();
 
     public SkillController() {
-        this.repoSkill = repoSkill;
+        this.skillRepository = skillRepository;
     }
 
     public void save(String name) {
         Skill s = new Skill();
         s.setName(name);
-        repoSkill.save(s);
+        skillRepository.save(s);
     }
 
     public void update(Long id, String name) throws IOException {
         Skill s = new Skill();
         s.setName(name);
         s.setId(id);
-        repoSkill.update(s);
+        skillRepository.update(s);
     }
 
     public Skill getById(Long id) throws IOException {
-        return repoSkill.getById(id);
+        return skillRepository.getById(id);
     }
 
     public void delete(Long id) throws IOException {
-        repoSkill.deleteById(id);
+        skillRepository.deleteById(id);
     }
 
     public List<Skill> getAll() throws IOException {
-        return repoSkill.getAll();
+        return skillRepository.getAll();
     }
 }

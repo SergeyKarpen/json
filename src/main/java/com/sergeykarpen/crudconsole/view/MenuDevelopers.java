@@ -1,11 +1,14 @@
 package com.sergeykarpen.crudconsole.view;
 
+import com.sergeykarpen.crudconsole.controller.AccountController;
 import com.sergeykarpen.crudconsole.controller.DeveloperController;
+import com.sergeykarpen.crudconsole.controller.SkillController;
 import com.sergeykarpen.crudconsole.model.Developer;
 import com.sergeykarpen.crudconsole.model.Skill;
 import com.sergeykarpen.crudconsole.repository.io.JavaIOSkillRepositoryImpl;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,6 +38,8 @@ public class MenuDevelopers {
 
     public void showMenuDevelopers() throws IOException {
         DeveloperController developerController = new DeveloperController();
+        SkillController skillController = new SkillController();
+        AccountController accountController = new AccountController();
 
         boolean isExit = false;
         do {
@@ -43,8 +48,17 @@ public class MenuDevelopers {
             String inputNumber = scanner.nextLine();
             switch (inputNumber) {
                 case ("1"):
-                    System.out.println(getAllMessage);
-                    printAll(developerController.getAll());
+                    System.out.println(saveMessage);
+                    String input = scanner.nextLine();
+                    System.out.println("добавить скилы: " + skillController.getAll());
+
+                    String inputId = scanner.nextLine();
+                    List<Skill> skillID = new ArrayList<>();
+                    if (!inputId.equalsIgnoreCase("Ok")) {
+                        skillID.add(skillController.getById(Long.valueOf(inputId)));
+                    }
+
+                    developerController.save(input);
                     break;
                 case ("2"):
                     System.out.print(saveMessage);

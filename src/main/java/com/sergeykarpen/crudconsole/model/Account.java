@@ -1,36 +1,25 @@
 package com.sergeykarpen.crudconsole.model;
 
 
-import java.util.Set;
-
 public class Account {
-    Developer developer;
-    Long developerID;
-    Set<Long> skillIDs;
-    AccountStatus accountStatus;
+    private Long id;
+    private String data;
+    private AccountStatus accountStatus;
 
-    public Developer getDeveloper() {
-        return developer;
+    public Long getId() {
+        return id;
     }
 
-    public void setDeveloper(Developer developer) {
-        this.developer = developer;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getDeveloperID() {
-        return developerID;
+    public String getData() {
+        return data;
     }
 
-    public void setDeveloperID(Long developerID) {
-        this.developerID = developerID;
-    }
-
-    public Set<Long> getSkillIDs() {
-        return skillIDs;
-    }
-
-    public void setSkillIDs(Set<Long> skillIDs) {
-        this.skillIDs = skillIDs;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public AccountStatus getAccountStatus() {

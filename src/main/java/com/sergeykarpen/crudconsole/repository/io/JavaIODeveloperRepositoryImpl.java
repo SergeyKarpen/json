@@ -2,7 +2,9 @@ package com.sergeykarpen.crudconsole.repository.io;
 
 import com.sergeykarpen.crudconsole.model.Developer;
 import com.sergeykarpen.crudconsole.model.Skill;
+import com.sergeykarpen.crudconsole.repository.AccountRepository;
 import com.sergeykarpen.crudconsole.repository.DeveloperRepository;
+import com.sergeykarpen.crudconsole.repository.SkillRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ import static com.sergeykarpen.crudconsole.util.IOUtil.*;
 
 public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
 
+    private SkillRepository skillRepository;
+    private AccountRepository accountRepository;
     private final static String relativePathToFile = "src\\main\\resources\\developers.txt";
 
     @Override

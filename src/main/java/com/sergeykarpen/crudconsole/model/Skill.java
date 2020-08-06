@@ -2,8 +2,8 @@ package com.sergeykarpen.crudconsole.model;
 
 public class Skill {
 
-    Long id;
-    String name;
+    private Long id;
+    private String name;
 
     public Long getId() {
         return id;

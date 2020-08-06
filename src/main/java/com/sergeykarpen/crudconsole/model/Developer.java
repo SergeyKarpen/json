@@ -4,10 +4,10 @@ import java.util.Set;
 
 public class Developer {
 
-     Long id;
-     String name;
-     Set<Skill> skills;
-     Account account;
+    private Long id;
+    private String name;
+    private Set<Skill> skills;
+    private Account account;
 
     public Long getId() {
         return id;
