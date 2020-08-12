@@ -2,7 +2,6 @@ package com.sergeykarpen.crudconsole.view;
 
 import com.sergeykarpen.crudconsole.controller.SkillController;
 import com.sergeykarpen.crudconsole.model.Skill;
-import com.sergeykarpen.crudconsole.repository.SkillRepository;
 
 import java.io.IOException;
 import java.util.List;
@@ -80,7 +79,7 @@ public class MenuSkills {
     }
 
 
-    public void printAll(List<Skill> listSkill) {
+    public static void printAll(List<Skill> listSkill) {
         for (Skill p : listSkill) {
             System.out.print(p.toString());
         }

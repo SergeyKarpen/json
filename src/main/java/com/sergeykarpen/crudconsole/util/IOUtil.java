@@ -1,7 +1,5 @@
 package com.sergeykarpen.crudconsole.util;
 
-import com.sergeykarpen.crudconsole.model.Skill;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;

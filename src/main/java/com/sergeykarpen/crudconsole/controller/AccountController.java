@@ -1,10 +1,10 @@
 package com.sergeykarpen.crudconsole.controller;
 
 import com.sergeykarpen.crudconsole.model.Account;
-import com.sergeykarpen.crudconsole.model.AccountStatus;
 import com.sergeykarpen.crudconsole.repository.AccountRepository;
 import com.sergeykarpen.crudconsole.repository.io.JavaIOAccountRepositoryImpl;
 
+import java.io.IOException;
 import java.util.List;
 
 public class AccountController {
@@ -15,7 +15,13 @@ public class AccountController {
     }
 
 
-    public void save (String name, AccountStatus accountStatus, List<Long> skillIds) {
-
+    public List<Account> getAll() throws IOException {
+        return accountRepository.getAll();
     }
+
+    public  Account getById(Long id) throws IOException {
+        return accountRepository.getById(id);
+    }
+
 }
+

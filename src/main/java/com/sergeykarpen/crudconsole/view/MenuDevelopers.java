@@ -3,19 +3,18 @@ package com.sergeykarpen.crudconsole.view;
 import com.sergeykarpen.crudconsole.controller.AccountController;
 import com.sergeykarpen.crudconsole.controller.DeveloperController;
 import com.sergeykarpen.crudconsole.controller.SkillController;
+import com.sergeykarpen.crudconsole.model.Account;
+import com.sergeykarpen.crudconsole.model.AccountStatus;
 import com.sergeykarpen.crudconsole.model.Developer;
 import com.sergeykarpen.crudconsole.model.Skill;
-import com.sergeykarpen.crudconsole.repository.io.JavaIOSkillRepositoryImpl;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class MenuDevelopers {
 
     private final String menuSelectionMessage = "Выберите необходимое действие:\n" +
-            "1.Просмотреть список developers\n" +
+            "1.Создать developers\n" +
             "2.Добавить developer\n" +
             "3.Удалить developer\n" +
             "4.Изменить существующего developer\n" +
@@ -25,7 +24,7 @@ public class MenuDevelopers {
 
     private final String getByIdMessage = "Введите id для выбора Developers ";
 
-    private final String saveMessage = "Введите Developers для добавления его в существующий список";
+    private final String saveMessage = "Введите Скилы для добавления их в существующий список";
 
     private final String deleteMessage = "Выберите Developers для его удаления из списка";
 
@@ -36,7 +35,7 @@ public class MenuDevelopers {
     private final String endMessage = "Выход из меню Developers";
 
 
-    public void showMenuDevelopers() throws IOException {
+    public void showMenuDevelopers() throws Exception {
         DeveloperController developerController = new DeveloperController();
         SkillController skillController = new SkillController();
         AccountController accountController = new AccountController();
@@ -48,22 +47,33 @@ public class MenuDevelopers {
             String inputNumber = scanner.nextLine();
             switch (inputNumber) {
                 case ("1"):
-                    System.out.println(saveMessage);
-                    String input = scanner.nextLine();
-                    System.out.println("добавить скилы: " + skillController.getAll());
 
-                    String inputId = scanner.nextLine();
-                    List<Skill> skillID = new ArrayList<>();
-                    if (!inputId.equalsIgnoreCase("Ok")) {
-                        skillID.add(skillController.getById(Long.valueOf(inputId)));
+                    System.out.println("Впишите имя developer");
+                    String name = scanner.nextLine();
+                    Set<Long> skillIds = new HashSet<>();
+                    boolean pip = true;
+                    do {
+                        System.out.println("Выьерите скилы из списка:");
+                        MenuSkills.printAll(skillController.getAll());
+                        String inputID = scanner.nextLine();
+                        skillIds.add(Long.valueOf((inputID)));
+                        System.out.println("Жми Q для выхода или Enter для продолжения");
+                        String YN = scanner.nextLine();
+                        if (YN.equalsIgnoreCase("Q")) {
+                            pip = false;
+                        }
                     }
-
-                    developerController.save(input);
+                    while (pip);
+                    System.out.println("Выбрать Account:");
+                    MenuAccounts.printAll(accountController.getAll());
+                    int accountId = scanner.nextInt();
+                    Account account = accountController.getById((long) accountId);
+                    developerController.create(name, AccountStatus.ACTIVE, account.getId(), skillIds);
                     break;
                 case ("2"):
                     System.out.print(saveMessage);
                     String inputNewStringDeveloper = scanner.nextLine();
-                    developerController.save(inputNewStringDeveloper);
+                    //  developerController.save( inputName,  );
                     break;
                 case ("3"):
                     System.out.print(deleteMessage);

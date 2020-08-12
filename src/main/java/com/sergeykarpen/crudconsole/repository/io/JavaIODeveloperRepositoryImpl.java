@@ -1,5 +1,7 @@
 package com.sergeykarpen.crudconsole.repository.io;
 
+import com.sergeykarpen.crudconsole.model.Account;
+import com.sergeykarpen.crudconsole.model.AccountStatus;
 import com.sergeykarpen.crudconsole.model.Developer;
 import com.sergeykarpen.crudconsole.model.Skill;
 import com.sergeykarpen.crudconsole.repository.AccountRepository;
@@ -8,6 +10,7 @@ import com.sergeykarpen.crudconsole.repository.SkillRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import static com.sergeykarpen.crudconsole.util.IOUtil.*;
@@ -38,22 +41,12 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
         return needDeveloperById;
     }
 
-    @Override
-    public Developer save(Developer developer) {
-        List<Developer> newDevelopers = null;
-        try {
-            newDevelopers = new ArrayList<>(convertStringsToObjects(readFile(getPathToFile(relativePathToFile))));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Developer saveDeveloper = new Developer();
-        saveDeveloper.setName(developer.getName());
-        saveDeveloper.setId((long) (newDevelopers.size() + 1));
-        newDevelopers.add(saveDeveloper);
-        writeInFileString("", relativePathToFile);
+    public Developer save (Developer developer)  throws IOException {
+        writeInFileString(convertObjectToString( developer ), relativePathToFile);
         return developer;
     }
 
+    // TODO: 11.08.2020
     @Override
     public void deleteById(Long id) {
         List<Developer> newDevelopers = null;
@@ -62,6 +55,7 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert newDevelopers != null;
         for (Developer d : newDevelopers) {
             if (d.getId().equals(id)) {
                 d.setName(null);
@@ -71,16 +65,36 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
     }
 
     @Override
-    public List<Developer> convertStringsToObjects(List<String> input) {
-        List<Developer> resultList = new ArrayList<>();
+    public List<Developer> convertStringsToObjects(List<String> input) throws IOException {
+        List<Developer> developers = new ArrayList<>();
         for (String str : input) {
             String[] splitedString = str.split(",");
-            Developer myDeveloper = new Developer();
-            myDeveloper.setId((long) Integer.parseInt(splitedString[0]));
-            myDeveloper.setName(splitedString[1]);
-            resultList.add(myDeveloper);
+            Developer developer = new Developer();
+
+            developer.setId((long) Integer.parseInt(splitedString[0]));
+            developer.setName(splitedString[1]);
+            developer.setAccountStatus(AccountStatus.valueOf(splitedString[2]));
+
+            Long accountId = Long.parseLong(splitedString[3]);
+            developer.setAccountId(accountId);
+            developer.setAccount(accountRepository.getById(accountId));
+
+            String[] sIds = splitedString[4].split("/");
+            HashSet<Skill> skills = new HashSet<>();
+            HashSet<Long> skillIds = new HashSet<>();
+            for (String id : sIds
+            ) {
+                Long skillId = Long.parseLong(id);
+                skillIds.add(skillId);
+                skills.add(skillRepository.getById(skillId));
+            }
+
+            developer.setSkillIds(skillIds);
+            developer.setSkills(skills);
+
+            developers.add(developer);
         }
-        return resultList;
+        return developers;
     }
 
     @Override

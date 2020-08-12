@@ -1,5 +1,5 @@
 1,JAVA
 2,Git
 3,JS
-4,null
-5,1111111
+4,NET
+5,BD

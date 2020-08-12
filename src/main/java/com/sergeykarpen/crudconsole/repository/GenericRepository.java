@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface GenericRepository<T, ID> {
-    T save(T t);
+    T save(T t) throws IOException;
 
     T update(T t) throws IOException;
 

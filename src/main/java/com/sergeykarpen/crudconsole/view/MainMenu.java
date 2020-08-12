@@ -15,7 +15,7 @@ public class MainMenu {
 
     private final String endMessage = "Конец работы приложения";
 
-    public void showMainMenu() throws IOException {
+    public void showMainMenu() throws Exception {
 
         boolean isExit = false;
         do {

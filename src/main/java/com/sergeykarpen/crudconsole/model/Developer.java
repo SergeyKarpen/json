@@ -4,10 +4,14 @@ import java.util.Set;
 
 public class Developer {
 
+    private AccountStatus accountStatus;
+    private Long accountId;
+    private Set<Long> skillIds;
+    private Account account;
+    private Set<Skill> skills;
+
     private Long id;
     private String name;
-    private Set<Skill> skills;
-    private Account account;
 
     public Long getId() {
         return id;
@@ -41,10 +45,32 @@ public class Developer {
         this.account = account;
     }
 
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+
+    public Long getAccountId() {
+        return accountId;
+    }
+
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+
+    public Set<Long> getSkillIds() {
+        return skillIds;
+    }
+
+    public void setSkillIds(Set<Long> skillIds) {
+        this.skillIds = skillIds;
+    }
+
     @Override
     public String toString() {
         return id + "," + name + "\n";
     }
 }
-
-

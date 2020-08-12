@@ -15,7 +15,7 @@ public class SkillController {
         this.skillRepository = skillRepository;
     }
 
-    public void save(String name) {
+    public void save(String name) throws IOException {
         Skill s = new Skill();
         s.setName(name);
         skillRepository.save(s);
