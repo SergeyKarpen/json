@@ -32,7 +32,7 @@ public class SkillController {
         return skillRepository.getById(id);
     }
 
-    public void delete(Long id) throws IOException {
+    public void deleteById(Long id) throws IOException {
         skillRepository.deleteById(id);
     }
 

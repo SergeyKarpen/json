@@ -59,6 +59,7 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert newSkills != null;
         for (Skill s : newSkills) {
             if (s.getId().equals(id)) {
                 s.setName(null);
@@ -75,7 +76,10 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
             Skill mySkill = new Skill();
             mySkill.setId((long) Integer.parseInt(splitedString[0]));
             mySkill.setName(splitedString[1]);
+
+
             resultList.add(mySkill);
+
         }
         return resultList;
     }

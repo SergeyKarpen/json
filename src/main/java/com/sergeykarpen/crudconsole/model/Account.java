@@ -4,7 +4,15 @@ package com.sergeykarpen.crudconsole.model;
 public class Account {
     private Long id;
     private String data;
-    private AccountStatus accountStatus;
+    private  AccountStatus accountStatus;
+
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
 
     public Long getId() {
         return id;
@@ -20,14 +28,6 @@ public class Account {
 
     public void setData(String data) {
         this.data = data;
-    }
-
-    public AccountStatus getAccountStatus() {
-        return accountStatus;
-    }
-
-    public void setAccountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
     }
 
     @Override

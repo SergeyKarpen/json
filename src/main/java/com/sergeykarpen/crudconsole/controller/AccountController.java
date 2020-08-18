@@ -14,7 +14,6 @@ public class AccountController {
         this.accountRepository = accountRepository;
     }
 
-
     public List<Account> getAll() throws IOException {
         return accountRepository.getAll();
     }

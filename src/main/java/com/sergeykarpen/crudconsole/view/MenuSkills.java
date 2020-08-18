@@ -58,7 +58,7 @@ public class MenuSkills {
                 case ("4"):
                     System.out.print(deleteMessage);
                     int inputDelSkill = scanner.nextInt();
-                    skillController.delete((long) inputDelSkill);
+                    skillController.deleteById((long) inputDelSkill);
                     break;
                 case ("5"):
                     System.out.print(getByIdMessage);

@@ -20,5 +20,4 @@ public interface GenericRepository<T, ID> {
     List<String> convertObjectsToStrings(List<T> input) throws IOException;
 
     String convertObjectToString(T t) throws IOException;
-
-    }
+}

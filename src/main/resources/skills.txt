@@ -3,3 +3,6 @@
 3,JS
 4,NET
 5,BD
+6,JavaScript
+7,SQL
+8,View

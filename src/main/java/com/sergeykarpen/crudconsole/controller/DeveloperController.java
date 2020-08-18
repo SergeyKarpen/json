@@ -1,7 +1,6 @@
 package com.sergeykarpen.crudconsole.controller;
 
 import com.sergeykarpen.crudconsole.addition.AdditionDeveloper;
-import com.sergeykarpen.crudconsole.model.AccountStatus;
 import com.sergeykarpen.crudconsole.model.Developer;
 import com.sergeykarpen.crudconsole.repository.DeveloperRepository;
 import com.sergeykarpen.crudconsole.repository.io.JavaIODeveloperRepositoryImpl;
@@ -16,24 +15,16 @@ public class DeveloperController {
     public AdditionDeveloper additionDeveloper = new AdditionDeveloper();
 
 
-    // TODO: 11.08.2020
-    public void create(String name, AccountStatus accountStatus, Long accountId, Set<Long> skillIds) throws Exception {
+    public void create(String name, String accountStatus, Long accountId, Set<Long> skillIds) throws Exception {
         additionDeveloper.create(name, accountStatus, accountId, skillIds);
     }
 
-    public void update(Long id, String name) throws IOException {
-        Developer d = new Developer();
-        d.setName( name );
-        d.setId( id );
-        developerRepository.update( d );
+    public void updateAll (Long id, String name, String accountStatus, Long accountId, Set<Long> skillIds) throws Exception {
+        additionDeveloper.updateAll (id, name, accountStatus, accountId, skillIds);
     }
 
-    public Developer getById(Long id) throws IOException {
-        return developerRepository.getById( id );
-    }
-
-    public void delete(Long id) throws IOException {
-        developerRepository.deleteById( id );
+    public void deleteById(Long id) throws IOException {
+        developerRepository.deleteById(id);
     }
 
     public List<Developer> getAll() throws IOException {

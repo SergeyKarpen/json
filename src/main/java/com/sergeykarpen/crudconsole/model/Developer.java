@@ -4,7 +4,7 @@ import java.util.Set;
 
 public class Developer {
 
-    private AccountStatus accountStatus;
+    private String accountStatus;
     private Long accountId;
     private Set<Long> skillIds;
     private Account account;
@@ -45,11 +45,11 @@ public class Developer {
         this.account = account;
     }
 
-    public AccountStatus getAccountStatus() {
+    public String getAccountStatus() {
         return accountStatus;
     }
 
-    public void setAccountStatus(AccountStatus accountStatus) {
+    public void setAccountStatus(String accountStatus) {
         this.accountStatus = accountStatus;
     }
 
@@ -71,6 +71,6 @@ public class Developer {
 
     @Override
     public String toString() {
-        return id + "," + name + "\n";
+        return "ID:"+id+ "; " + "NAME:"+ name + "; " + "SKILLS:" +  skillIds + "; " + "ACCOUNT ID: " + accountId + "; " + "ACCOUNT:" + account+ "; " + "ACCOUNTSTATUS:" + accountStatus +"\n";
     }
 }

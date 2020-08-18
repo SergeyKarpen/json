@@ -20,7 +20,7 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Account update(Account account) throws IOException {
+    public Account update(Account account) {
         return null;
     }
 
@@ -33,8 +33,8 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
     public Account getById(Long id) {
         Account needAccountById = new Account();
         try {
-            for (Account needAccount : convertStringsToObjects( readFile( (getPathToFile( relativePathToFile )) ) )) {
-                if (needAccount.getId().equals( id )) {
+            for (Account needAccount : convertStringsToObjects(readFile((getPathToFile(relativePathToFile))))) {
+                if (needAccount.getId().equals(id)) {
                     needAccountById = needAccount;
                 }
             }
@@ -44,8 +44,8 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
         return needAccountById;
     }
 
-        @Override
-    public void deleteById(Long id) throws IOException {
+    @Override
+    public void deleteById(Long id) {
     }
 
     @Override
@@ -71,7 +71,7 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public String convertObjectToString (Account account) {
+    public String convertObjectToString(Account account) {
         return account.toString();
     }
 }
