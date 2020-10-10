@@ -6,17 +6,14 @@ import com.sergeykarpen.json.model.Skill;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class IOUtil {
 
     public static Map<Long, Skill> readFile(String fileName) throws IOException {
         Gson gson = new Gson();
         Reader reader = Files.newBufferedReader(Paths.get(fileName));
-        Map mapSkills = gson.fromJson(reader, Map.class);
+        Map mapSkills = gson.fromJson(reader, HashMap.class);
         reader.close();
         return mapSkills;
     }

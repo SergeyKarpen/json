@@ -19,29 +19,19 @@ public class JsonSkillRepositoryImpl implements SkillRepository {
 
     @Override
     public Skill getById(Long id) throws IOException {
-      /*  Skill skill = new Skill();
-        Collection<Long> collection = readFile(relativePathToFile).keySet();
-
-        for (Long l : collection) {
-            if (id.equals(collection));
-
-
-        }
-
-       */
-
-        return null;
-
-
+        Skill skill = new Skill();
+        System.out.println(readFile(relativePathToFile));
+        return skill;
     }
-
 
 
     @Override
     public void deleteById(Long aLong) throws IOException {
+Map<Long, Skill> map = readFile(relativePathToFile);
+map.remove(aLong);
 
+        System.out.println(map);
     }
-
 
     @Override
     public List<Skill> convertStringsToObjects(List<String> input) {
