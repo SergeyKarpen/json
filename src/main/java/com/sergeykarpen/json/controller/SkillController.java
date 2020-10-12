@@ -5,20 +5,16 @@ import com.sergeykarpen.json.repository.SkillRepository;
 import com.sergeykarpen.json.repository.io.JsonSkillRepositoryImpl;
 
 import java.io.IOException;
-import java.util.List;
 
 public class SkillController {
 
     private SkillRepository skillRepository = new JsonSkillRepositoryImpl();
+    private JsonSkillRepositoryImpl jsonSkillRepository = new JsonSkillRepositoryImpl();
 
-    public SkillController() {
-        this.skillRepository = skillRepository;
-    }
-
-    public void save(String name) throws IOException {
+    public void create(String name) throws IOException {
         Skill s = new Skill();
         s.setName(name);
-        skillRepository.save(s);
+        skillRepository.create(s);
     }
 
     public void update(Long id, String name) throws IOException {
@@ -36,4 +32,4 @@ public class SkillController {
         skillRepository.deleteById(id);
     }
 
-   }
+}

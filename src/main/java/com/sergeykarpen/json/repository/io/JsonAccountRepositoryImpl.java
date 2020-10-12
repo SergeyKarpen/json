@@ -6,17 +6,13 @@ import com.sergeykarpen.json.repository.AccountRepository;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import static com.sergeykarpen.json.util.IOUtil.getPathToFile;
-import static com.sergeykarpen.json.util.IOUtil.readFile;
 
 public class JsonAccountRepositoryImpl implements AccountRepository {
 
     private final static String relativePathToFile = "src\\main\\resources\\accounts.json";
 
     @Override
-    public Account save(Account account) {
+    public Account create(Account account) {
         return null;
     }
 
@@ -26,14 +22,12 @@ public class JsonAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public Map<Long, Account> getAll() throws IOException {
+    public List<Account> getAll() throws IOException {
         return null;
     }
 
-
     @Override
     public Account getById(Long id) {
-
         return null;
     }
 
@@ -42,29 +36,17 @@ public class JsonAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public List<Account> convertStringsToObjects(List<String> input) {
-        List<Account> resultList = new ArrayList<>();
-        for (String acc : input) {
-            String[] splitedString = acc.split(",");
-            Account myAcc = new Account();
-            myAcc.setId((long) Integer.parseInt(splitedString[0]));
-            myAcc.setName(splitedString[1]);
-            resultList.add(myAcc);
-        }
-        return resultList;
+    public List<Account> getListObjectsFromJson(String s) throws IOException {
+        return null;
     }
 
     @Override
-    public List<String> convertObjectsToStrings(List<Account> input) {
-        List<String> listStrings = new ArrayList<>();
-        for (Account a : input) {
-            listStrings.add(convertObjectToString(a));
-        }
-        return listStrings;
+    public void writeListObjectsInJson(List<Account> list, String s) throws IOException {
+
     }
 
     @Override
-    public String convertObjectToString(Account account) {
-        return account.toString();
+    public Long maxIdInList(List<Account> t) throws IOException {
+        return null;
     }
 }

@@ -1,14 +1,22 @@
 package com.sergeykarpen.json.repository.io;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.sergeykarpen.json.model.Account;
 import com.sergeykarpen.json.model.AccountStatus;
 import com.sergeykarpen.json.model.Developer;
 import com.sergeykarpen.json.model.Skill;
 import com.sergeykarpen.json.repository.DeveloperRepository;
 import com.sergeykarpen.json.repository.SkillRepository;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 
+import static com.sergeykarpen.json.model.AccountStatus.ACTIVE;
 import static com.sergeykarpen.json.model.AccountStatus.valueOf;
 import static com.sergeykarpen.json.util.IOUtil.*;
 
@@ -18,23 +26,34 @@ public class JsonDeveloperRepositoryImpl implements DeveloperRepository {
     };
     private final static String relativePathToFile = "src\\main\\resources\\developers.json";
 
-
+    @Override
+    public List<Developer> getAll() {
+        return getListObjectsFromJson(relativePathToFile);
+    }
 
     @Override
     public Developer getById(Long id) {
-
-        return null;
+        List<Developer> developers = getListObjectsFromJson(relativePathToFile);
+        return developers.stream().filter(p -> p.getId().equals(id)).findFirst().orElse(null);
     }
 
-    public Developer save(Developer developer) throws IOException {
-        writeInFileString(convertObjectToString(developer), relativePathToFile);
-        return developer;
+    public Developer create(Developer developer) {
+        Developer newDeveloper = new Developer();
+        newDeveloper.setName(String.valueOf(developer));
+        newDeveloper.setId(maxIdInList(getListObjectsFromJson(relativePathToFile)) + 1);
+        newDeveloper.setAccountStatus(String.valueOf(ACTIVE));
+        newDeveloper.setAccountId(developer.getAccountId());
+        newDeveloper.setSkillIds(developer.getSkillIds());
+        List<Developer> developers = getListObjectsFromJson(relativePathToFile);
+        developers.add(newDeveloper);
+        writeListObjectsInJson(developers, relativePathToFile);
+        return newDeveloper;
     }
-
 
     @Override
-    public void deleteById(Long id) throws IOException {
-     /*   List<Developer> developers = null;
+    public void deleteById(Long id) {
+        /*
+        List<Developer> developers = null;
         try {
             developers = new ArrayList<>(convertStringsToObjects(readFile(getPathToFile(relativePathToFile))));
         } catch (IOException e) {
@@ -49,69 +68,61 @@ public class JsonDeveloperRepositoryImpl implements DeveloperRepository {
             }
         }
         writeInFileList(convertObjectsToStrings(developers), relativePathToFile);
-
-      */
+*/
     }
 
-
-
     @Override
-    public List<Developer> convertStringsToObjects(List<String> input) throws IOException {
-        List<Developer> developers = new ArrayList<>();
-        for (String str : input) {
-            String[] splitedString = str.split(",");
-            Developer developer = new Developer();
-            developer.setId((long) Integer.parseInt(splitedString[0]));
-            developer.setName(splitedString[1]);
-            developer.setAccountId((long) Integer.parseInt(splitedString[2]));
-            developer.setAccountStatus(String.valueOf(((splitedString[3]))));
-            String[] sIds = splitedString[4].split("/");
-            Set<Long> skillIds = new HashSet<>();
-            Set<Skill> skills = new HashSet<>();
-            for (String id : sIds) {
-                try {
-                    skillIds.add(Long.valueOf(id));
-                    skills.add(skillRepository.getById(Long.valueOf(id)));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            developer.setSkillIds(skillIds);
-            developer.setSkills(skills);
-            developers.add(developer);
+    public List<Developer> getListObjectsFromJson(String pathFile) {
+        Gson gson = new Gson();
+        Reader reader = null;
+        try {
+            reader = Files.newBufferedReader(Paths.get(pathFile));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert reader != null;
+        List<Developer> developers = gson.fromJson(reader, new TypeToken<List<Developer>>() {
+        }.getType());
+        try {
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return developers;
     }
 
     @Override
-    public List<String> convertObjectsToStrings(List<Developer> developers) throws IOException {
-        List<String> listStrings = new ArrayList<>();
-        for (Developer d : developers) {
-            listStrings.add(convertObjectToString(d));
+    public void writeListObjectsInJson(List<Developer> developers, String fileName) {
+        FileWriter writer = null;
+        try {
+            writer = new FileWriter(getPathToFile(fileName), false);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return listStrings;
-    }
-
-    @Override
-    public String convertObjectToString(Developer developer) throws IOException {
-        String convertString = developer.getId() + "," + developer.getName() + "," + developer.getAccountId() + "," + developer.getAccountStatus() + ",";
-        StringJoiner stringJoiner = new StringJoiner("/");
-        for (Long aLong : developer.getSkillIds()
-        ) {
-            stringJoiner.add(aLong + "");
+        new Gson().toJson(developers, writer);
+        try {
+            assert writer != null;
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        convertString += stringJoiner;
-        return convertString+"\n";
     }
 
     @Override
-    public Developer update(Developer developer) throws IOException {
-
-        return null;
+    public Long maxIdInList(List<Developer> developers) {/*
+         Long along = developers.stream().max(Comparator.comparing(Developer::getId))
+                .get()
+                .getId();
+         if (along == null) {
+             return 1L;
+         } else return along;
+         */
+        return 0L;
     }
 
+
     @Override
-    public Map<Long, Developer> getAll() throws IOException {
+    public Developer update(Developer developer) {
         return null;
     }
 }

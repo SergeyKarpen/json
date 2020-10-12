@@ -1,5 +1,14 @@
-{
-  "1": "JAVA",
-  "2": "Git",
-  "3": "JS"
-}
+[
+  {
+    "id": 1,
+    "name": "NewUpSkill"
+  },
+  {
+    "id": 2,
+    "name": "Git"
+  },
+  {
+    "id": 3,
+    "name": "New"
+  }
+]
