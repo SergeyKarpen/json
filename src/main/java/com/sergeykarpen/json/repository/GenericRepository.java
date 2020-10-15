@@ -20,5 +20,4 @@ public interface GenericRepository<T, ID> {
     void writeListObjectsInJson(List<T> list, String s) throws IOException;
 
     ID maxIdInList(List<T> t) throws IOException;
-
 }

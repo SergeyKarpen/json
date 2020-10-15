@@ -1,8 +1,8 @@
 package com.sergeykarpen.json.model;
 
 abstract class BasicKitModel {
-    Long id;
     String name;
+    Long id;
 
     public Long getId() {
         return id;
@@ -20,5 +20,9 @@ abstract class BasicKitModel {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return id + " " + name ;
     }
+}
 

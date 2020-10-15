@@ -1,3 +1,17 @@
-1,account1
-2,account2
-3,account3
+[
+  {
+    "name": "FirstAccount",
+    "id": 1,
+    "accountStatus": "ACTIVE"
+  },
+  {
+    "name": "SecondAccount",
+    "id": 2,
+    "accountStatus": "BANNED"
+  },
+  {
+    "name": "ThirdAccount",
+    "id": 3,
+    "accountStatus": "DELETED"
+  }
+]

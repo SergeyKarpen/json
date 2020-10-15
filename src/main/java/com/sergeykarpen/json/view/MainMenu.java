@@ -12,7 +12,7 @@ public class MainMenu {
     private final String incorrectInputMessage = "Неверный ввод, повторите";
 
     private final String endMessage = "Конец работы приложения";
-/*
+
     public void showMainMenu() throws Exception {
 
         boolean isExit = false;
@@ -39,7 +39,5 @@ public class MainMenu {
         } while (!isExit);
         System.out.println(endMessage);
     }
-
- */
 }
 

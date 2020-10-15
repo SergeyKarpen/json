@@ -2,17 +2,13 @@ package com.sergeykarpen.json.model;
 
 import java.util.Set;
 
-public class Developer extends BasicKitModel{
+public class Developer extends BasicKitModel {
 
     private String accountStatus;
     private Long accountId;
     private Set<Long> skillIds;
     private Account account;
     private Set<Skill> skills;
-
-     public void setSkills(Set<Skill> skills) {
-        this.skills = skills;
-    }
 
     public String getAccountStatus() {
         return accountStatus;
@@ -38,8 +34,25 @@ public class Developer extends BasicKitModel{
         this.skillIds = skillIds;
     }
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Set<Skill> getSkills() {
+        return skills;
+    }
+
+    public void setSkills(Set<Skill> skills) {
+        this.skills = skills;
+    }
+
+
     @Override
     public String toString() {
-        return name;
+        return id + " " + name + " " + account + " " + skills + "\n";
     }
 }

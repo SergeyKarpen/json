@@ -31,7 +31,6 @@ public class MenuSkills {
 
     private final String endMessage = "Выход из меню Skills";
 
-/*
     public void showMenuSkills() throws IOException {
         SkillController skillController = new SkillController();
 
@@ -43,17 +42,17 @@ public class MenuSkills {
             switch (inputNumber) {
                 case ("1"):
                     System.out.println(getAllMessage);
-                    printAll(skillController.getAll());
+                    System.out.println((skillController.getAll()));
                     break;
                 case ("2"):
                     System.out.print(getByIdMessage);
                     int inputId = scanner.nextInt();
-                    skillController.getById((long) inputId).toString();
+                    System.out.println(skillController.getById((long) inputId).toString());
                     break;
                 case ("3"):
                     System.out.print(saveMessage);
                     String inputNewStringSkill = scanner.nextLine();
-                    skillController.save(inputNewStringSkill);
+                    skillController.create(inputNewStringSkill);
                     break;
                 case ("4"):
                     System.out.print(deleteMessage);
@@ -77,13 +76,12 @@ public class MenuSkills {
         } while (!isExit);
         System.out.println(endMessage);
     }
-
-
+/*
     public static void printAll(List<Skill> listSkill) {
         for (Skill p : listSkill) {
-            System.out.print(p.toString());
+            System.out.println(p.getId() + p.getName());
         }
-    }
-    */
+            }
+     */
 
 }

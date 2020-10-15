@@ -1,14 +1,22 @@
 [
   {
-    "id": 1,
-    "name": "NewUpSkill"
+    "name": "Java",
+    "id": 1
   },
   {
-    "id": 2,
-    "name": "Git"
+    "name": "JS",
+    "id": 2
   },
   {
-    "id": 3,
-    "name": "New"
+    "name": "GIT",
+    "id": 3
+  },
+  {
+    "name": "React",
+    "id": 4
+  },
+  {
+    "name": "Maven",
+    "id": 5
   }
 ]

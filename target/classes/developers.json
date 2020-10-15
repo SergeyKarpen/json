@@ -1,12 +1,17 @@
 [
   {
-    "accountStatus": "ACTIVE",
-    "accountId": 1,
-    "skillIds": [
-      1,
-      2
+    "account": {
+      "accountStatus": "ACTIVE",
+      "name": "ThirdAccount",
+      "id": 3
+    },
+    "skills": [
+      {
+        "name": "React",
+        "id": 4
+      }
     ],
-    "id": 1,
-    "name": "Second"
+    "name": "Dag",
+    "id": 1
   }
 ]
